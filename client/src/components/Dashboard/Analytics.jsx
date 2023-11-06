@@ -1,28 +1,19 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import Modal from 'react-modal'
+import {RiMenu3Line} from 'react-icons/ri'
+import {AiOutlineClose} from 'react-icons/ai'
+import NavBar from './NavBar'
 function Analytics() {
-  const [modalOpen,setModal]=useState(false)
-
-  function handleClick(){
-    setModal(true)
-  }
-  function handleClose(){
-    setModal(false)
-  }
+  
   return (
-    <div>
-      <button onClick={handleClick}>Press</button>
-      <Modal
-        isOpen={modalOpen}
-        onRequestClose={handleClose}
-      >
-        <box>
-          <h1>Sample</h1>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil dicta eaque ea totam cumque, laudantium inventore dolorem error quam ipsa aspernatur nobis est animi debitis aut illo voluptates quod quo!</p>
-        </box>
-      </Modal>
+    <div className=' py-9 min-h-screen bg-gray-50'>
+      <div className='w-[85%] m-auto'>
+        <NavBar></NavBar>
+      </div>
     </div>
+    
+    
   )
 }
 

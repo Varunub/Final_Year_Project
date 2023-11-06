@@ -123,6 +123,10 @@ function Profile() {
     }
     
   }
+  function handleClose(){
+    setModal(false)
+    setEdit(false)
+  }
 
 
 
@@ -160,6 +164,7 @@ function Profile() {
                 <Modal
                   isOpen={onModal}
                   style={customStyles}
+                  onRequestClose={handleClose}
                 >
                   <div>
                       <div>
