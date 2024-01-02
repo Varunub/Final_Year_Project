@@ -1,0 +1,36 @@
+"filename", "language", "Markdown", "JavaScript", "JSON with Comments", "JavaScript JSX", "CSS", "JSON", "XML", "HTML", "comment", "blank", "total"
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\README.md", "Markdown", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\client\.eslintrc.cjs", "JavaScript", 0, 20, 0, 0, 0, 0, 0, 0, 0, 1, 21
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\client\README.md", "Markdown", 5, 0, 0, 0, 0, 0, 0, 0, 0, 4, 9
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\client\index.html", "HTML", 0, 0, 0, 0, 0, 0, 0, 13, 0, 1, 14
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\client\package-lock.json", "JSON", 0, 0, 0, 0, 0, 13033, 0, 0, 0, 1, 13034
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\client\package.json", "JSON", 0, 0, 0, 0, 0, 44, 0, 0, 0, 1, 45
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\client\public\vite.svg", "XML", 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\client\src\App.jsx", "JavaScript JSX", 0, 0, 0, 25, 0, 0, 0, 0, 4, 5, 34
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\client\src\assets\images\index.js", "JavaScript", 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\client\src\assets\logo\index.js", "JavaScript", 0, 4, 0, 0, 0, 0, 0, 0, 1, 1, 6
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\client\src\components\Context\MyContext.jsx", "JavaScript JSX", 0, 0, 0, 15, 0, 0, 0, 0, 3, 6, 24
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\client\src\components\Dashboard\Analytics.jsx", "JavaScript JSX", 0, 0, 0, 15, 0, 0, 0, 0, 1, 4, 20
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\client\src\components\Dashboard\Dashboard.jsx", "JavaScript JSX", 0, 0, 0, 17, 0, 0, 0, 0, 3, 2, 22
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\client\src\components\Dashboard\Employees.jsx", "JavaScript JSX", 0, 0, 0, 48, 0, 0, 0, 0, 7, 5, 60
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\client\src\components\Dashboard\Hero.jsx", "JavaScript JSX", 0, 0, 0, 65, 0, 0, 0, 0, 3, 9, 77
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\client\src\components\Dashboard\Mixing.jsx", "JavaScript JSX", 0, 0, 0, 7, 0, 0, 0, 0, 1, 2, 10
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\client\src\components\Dashboard\NavBar.jsx", "JavaScript JSX", 0, 0, 0, 75, 0, 0, 0, 0, 3, 3, 81
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\client\src\components\Dashboard\Profile.jsx", "JavaScript JSX", 0, 0, 0, 207, 0, 0, 0, 0, 4, 37, 248
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\client\src\components\Dashboard\TableData.jsx", "JavaScript JSX", 0, 0, 0, 60, 0, 0, 0, 0, 3, 3, 66
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\client\src\components\Home.jsx", "JavaScript JSX", 0, 0, 0, 30, 0, 0, 0, 0, 3, 5, 38
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\client\src\components\LoginForm.jsx", "JavaScript JSX", 0, 0, 0, 91, 0, 0, 0, 0, 8, 10, 109
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\client\src\components\Modals\BatchForm.jsx", "JavaScript JSX", 0, 0, 0, 26, 0, 0, 0, 0, 1, 2, 29
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\client\src\components\Modals\DataForm.jsx", "JavaScript JSX", 0, 0, 0, 68, 0, 0, 0, 0, 3, 4, 75
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\client\src\components\Modals\PasswordForm.jsx", "JavaScript JSX", 0, 0, 0, 16, 0, 0, 0, 0, 1, 2, 19
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\client\src\components\RegisterForm.jsx", "JavaScript JSX", 0, 0, 0, 95, 0, 0, 0, 0, 7, 3, 105
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\client\src\index.css", "CSS", 0, 0, 0, 0, 3, 0, 0, 0, 0, 1, 4
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\client\src\main.jsx", "JavaScript JSX", 0, 0, 0, 12, 0, 0, 0, 0, 0, 3, 15
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\server\package-lock.json", "JSON", 0, 0, 0, 0, 0, 2500, 0, 0, 0, 1, 2501
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\server\package.json", "JSON", 0, 0, 0, 0, 0, 40, 0, 0, 0, 1, 41
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\server\src\conn.js", "JavaScript", 0, 12, 0, 0, 0, 0, 0, 0, 0, 1, 13
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\server\src\controller.js", "JavaScript", 0, 191, 0, 0, 0, 0, 0, 0, 6, 1, 198
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\server\src\router.js", "JavaScript", 0, 41, 0, 0, 0, 0, 0, 0, 0, 1, 42
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\server\src\server.js", "JavaScript", 0, 25, 0, 0, 0, 0, 0, 0, 9, 1, 35
+"c:\Users\varun\OneDrive\Desktop\Varun\Programming\Web dev\Login\server\tsconfig.json", "JSON with Comments", 0, 0, 12, 0, 0, 0, 0, 0, 89, 9, 110
+"Total", "-", 6, 293, 12, 872, 3, 15617, 1, 13, 160, 131, 17108

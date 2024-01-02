@@ -12,19 +12,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getEmployees = exports.validate = exports.getProfile = exports.getName = exports.resetPassword = exports.updateuser = exports.logout = exports.userInfo = exports.login = exports.register = void 0;
+exports.updateAdmin = exports.updateRecord = exports.getyesterdayRecords = exports.getCurrentRecords = exports.getEmployees = exports.validate = exports.getProfile = exports.getName = exports.resetPassword = exports.updateuser = exports.logout = exports.userInfo = exports.insertData = exports.verifyUserPermissions = exports.login = exports.register = void 0;
 const conn_js_1 = require("./conn.js");
 const bcrypt_1 = __importDefault(require("bcrypt"));
+const luxon_1 = require("luxon");
 require("dotenv/config");
 function register(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const { employee, username, password, phone, name } = req.body;
         console.log(username, password, phone, name);
-        conn_js_1.client.query(`SELECT * FROM EMPLOYEE WHERE employee_id=$1`, [employee], (err, result) => {
+        conn_js_1.client.query(`SELECT * FROM EMPLOYEE WHERE employee_id=$1`, [employee.trim()], (err, result) => {
             try {
                 if (result.rowCount == 0) {
                     const hashed = bcrypt_1.default.hashSync(password, Number(process.env.SALTING));
-                    conn_js_1.client.query(`INSERT INTO EMPLOYEE (employee_id,name,email,password,phonenumber) VALUES ($1,$2,$3,$4,$5)`, [employee, name, username, hashed, phone], (err, result) => {
+                    conn_js_1.client.query(`INSERT INTO EMPLOYEE (employee_id,name,email,password,phonenumber) VALUES ($1,$2,$3,$4,$5)`, [employee.trim(), name.trim(), username.trim(), hashed, phone], (err, result) => {
                         if (err) {
                             res.send({ msg: "Error inserting" });
                         }
@@ -50,7 +51,7 @@ function login(req, res) {
         const { username, password } = req.body;
         const hashed = bcrypt_1.default.hashSync(password, Number(process.env.SALTING));
         try {
-            conn_js_1.client.query(`SELECT * FROM EMPLOYEE WHERE email=$1 or name=$1 or employee_id=$1`, [username], (err, result) => __awaiter(this, void 0, void 0, function* () {
+            conn_js_1.client.query(`SELECT * FROM EMPLOYEE WHERE email=$1 or name=$1 or employee_id=$1`, [username.trim()], (err, result) => __awaiter(this, void 0, void 0, function* () {
                 if (result.rowCount == 0) {
                     res.send({ msg: "Please register" });
                 }
@@ -79,6 +80,47 @@ function login(req, res) {
     });
 }
 exports.login = login;
+function verifyUserPermissions(empid) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const result = yield conn_js_1.client.query(`SELECT * FROM EMPLOYEE WHERE employee_id=$1 and admin=1`, [empid]);
+        console.log(result.rowCount);
+        if (result.rowCount > 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    });
+}
+exports.verifyUserPermissions = verifyUserPermissions;
+function insertData(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const { empid, temp, gcs, comp, moist, perm } = req.body;
+        console.log(req.body);
+        const date = luxon_1.DateTime.local();
+        try {
+            // Verify user permissions.
+            if (!(yield verifyUserPermissions(empid))) {
+                res.send({ msg: "User not allowed to insert data." });
+            }
+            else {
+                conn_js_1.client.query(`INSERT INTO MACHINEDATA (empid, temp, gcs, comp, moist, perm, datetime) VALUES ($1, $2, $3, $4, $5, $6,$7)`, [empid.trim(), parseFloat(temp), parseFloat(gcs), parseFloat(comp), parseFloat(moist), parseFloat(perm), date.toJSDate()], (err, result) => __awaiter(this, void 0, void 0, function* () {
+                    if (err) {
+                        console.log(err);
+                        +res.send({ msg: "Something went wrong" });
+                    }
+                    else {
+                        res.send({ msg: "Successfuly Inserted" });
+                    }
+                }));
+            }
+        }
+        catch (err) {
+            res.send({ msg: "Something went wrong" });
+        }
+    });
+}
+exports.insertData = insertData;
 function userInfo(req, res) {
     const token = req.cookies;
     console.log("token", token);
@@ -129,7 +171,7 @@ function getName(req, res) {
 exports.getName = getName;
 function getProfile(req, res) {
     const id = req.params['id'];
-    conn_js_1.client.query(`SELECT * FROM EMPLOYEE WHERE employee_id=$1`, [id], (err, result) => {
+    conn_js_1.client.query(`SELECT * FROM EMPLOYEE WHERE employee_id=$1 `, [id], (err, result) => {
         if (err) {
             console.log(err);
         }
@@ -152,8 +194,64 @@ function validate(req, res) {
 }
 exports.validate = validate;
 function getEmployees(req, res) {
-    conn_js_1.client.query(`SELECT * FROM EMPLOYEE`, (err, result) => {
+    conn_js_1.client.query(`SELECT * FROM EMPLOYEE order by name`, (err, result) => {
         res.send({ data: result.rows });
     });
 }
 exports.getEmployees = getEmployees;
+function getCurrentRecords(req, res) {
+    const date = luxon_1.DateTime.local();
+    const start = date.startOf('day');
+    const end = date.endOf('day');
+    conn_js_1.client.query(`select * from machinedata where datetime>=$1 and datetime<=$2 order by datetime asc`, [start, end], (err, result) => {
+        res.send({ data: result.rows });
+    });
+}
+exports.getCurrentRecords = getCurrentRecords;
+function getyesterdayRecords(req, res) {
+    const date = luxon_1.DateTime.local();
+    const start = date.minus({ days: 1 }).startOf('day');
+    const end = date.minus({ days: 1 }).endOf('day');
+    conn_js_1.client.query(`select * from machinedata where datetime>=$1 and datetime<=$2 order by datetime asc`, [start, end], (err, result) => {
+        res.send({ data: result.rows });
+    });
+}
+exports.getyesterdayRecords = getyesterdayRecords;
+function updateRecord(req, res) {
+    const { datetime, temp, gcs, comp, moist, perm } = req.body;
+    conn_js_1.client.query(`update machinedata set temp=$1,gcs=$2,comp=$3,moist=$4,perm=$5 where datetime=$6 `, [parseFloat(temp), parseFloat(gcs), parseFloat(comp), parseFloat(moist), parseFloat(perm), datetime], (err, result) => {
+        if (err) {
+            console.log(err);
+            res.send({ msg: "Something went wrong" });
+        }
+        else {
+            res.send({ msg: "Successfully Updated " });
+        }
+    });
+}
+exports.updateRecord = updateRecord;
+function updateAdmin(req, res) {
+    const id = req.params['id'];
+    const { access } = req.body;
+    if (access) {
+        conn_js_1.client.query(`update employee set admin=$1 where employee_id=$2`, [1, id], (err, result) => {
+            if (err) {
+                res.send({ msg: "Something went wrong" });
+            }
+            else {
+                res.send({ msg: "successfuly updated" });
+            }
+        });
+    }
+    else {
+        conn_js_1.client.query(`update employee set admin=$1 where employee_id=$2`, [0, id], (err, result) => {
+            if (err) {
+                res.send({ msg: "Something went wrong" });
+            }
+            else {
+                res.send({ msg: "successfuly updated" });
+            }
+        });
+    }
+}
+exports.updateAdmin = updateAdmin;

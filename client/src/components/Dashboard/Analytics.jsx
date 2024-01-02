@@ -10,6 +10,10 @@ function Analytics() {
     <div className=' py-9 min-h-screen bg-gray-50'>
       <div className='w-[85%] m-auto'>
         <NavBar></NavBar>
+        <div className=' flex flex-col'>
+          
+
+        </div>
       </div>
     </div>
     

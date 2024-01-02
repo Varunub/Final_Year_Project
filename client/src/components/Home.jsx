@@ -30,7 +30,7 @@ function Home() {
   return (
     <>
         {state?
-        <Dashboard></Dashboard>:navigate('/login')}
+        <div className=' overflow-auto scrollbar-hide'><Dashboard></Dashboard></div>:navigate('/login')}
     </>
   )
 }

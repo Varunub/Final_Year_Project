@@ -57,7 +57,7 @@ function NavBar() {
         <div className=' min-h-min bg-white w-[70%] absolute z-10 shadow-xl text-right p-6 rounded-xl  '>
           <button className='text-3xl' onClick={handleClose}><AiOutlineClose></AiOutlineClose></button>
           <div className=' m-3'>
-            <p className= 'm-auto text-2xl font-bold font-mono' >Hii,{name}</p>
+            <p className= 'm-auto text-2xl font-bold font-mono' >Hii, {name}</p>
           </div>
           <div className=' m-3'>
             <a href="/home">Home</a>

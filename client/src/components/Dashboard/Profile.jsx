@@ -27,6 +27,7 @@ function Profile() {
     name:"",
     email:"",
     phonenumber:"",
+    superadmin:"",
     password:null,
     confirm:null
   }
@@ -49,7 +50,8 @@ function Profile() {
           employee_id:response.data.data.employee_id,
           name:response.data.data.name,
           email:response.data.data.email,
-          phonenumber:response.data.data.phonenumber
+          phonenumber:response.data.data.phonenumber,
+          superadmin:response.data.data.superadmin
         })
       })
     }
@@ -128,7 +130,27 @@ function Profile() {
     setEdit(false)
   }
 
+  function renderEmployees(){
+    return (
+      <section className='min-h-screen bg-gray-50   py-9'>
+        <div className=' w-[85%] m-auto'>
+          <div className=' border-2 p-8 mt-5 bg-white rounded-lg'>
+            <div className=' text-xl  text-gray-900 p-2 '>
+              Admin Details
+            </div>
+            <div className= ' mt-8'>
+              <Employees id={current.employee_id}></Employees>
 
+            </div>
+          </div>
+
+          
+        </div>
+        
+      </section>
+
+    )
+  }
 
   function render(){
     return (
@@ -200,10 +222,11 @@ function Profile() {
             </div>
           </div>
 
-          <div>
-            <Employees id={current.employee_id}></Employees>
-          </div>
+          
         </div>
+          
+
+        {current.superadmin?renderEmployees():<></>}
       </section>
     )
   }
