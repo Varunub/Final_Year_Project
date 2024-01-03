@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 
-function Mixing() {
+function Graph() {
   return (
-    <div>Mixing</div>
+    <div>Graph</div>
   )
 }
 
-export default Mixing
+export default Graph;

@@ -26,8 +26,7 @@ function TableData(props) {
   useEffect(()=>{
     const token=cookie.get("jwt")
     const data=jwt(token)
-    axios.get(`${import.meta.env.VITE_API_GETPROFILE_ENDPOINT}${data.id}`).then(async (response)=>{
-      // console.log(response.data.data)
+    axios.get(`${import.meta.env.VITE_API_GETPROFILE_ENDPOINT}${data.id}`).then((response)=>{
       setCurrent({
         superadmin:response.data.data.superadmin,
         admin:response.data.data.admin
@@ -73,21 +72,21 @@ function TableData(props) {
   }
 
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-lg p-4" >
-        <table className=" w-[90%] text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400" >
+    <div className="relative overflow-x-auto shadow-md rounded-lg sm:rounded-lg p-4" >
+        <table className=" w-[90%] text-sm text-center rtl:text-center text-gray-500 dark:text-gray-400 m-auto" >
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                    <th scope="col" className="px-6 py-3  max-md:hidden ">
+                    <th scope="col" className="px-6 py-3  ">
                         Date
                     </th>
-                    <th scope="col" className="px-6 py-3  max-md:hidden ">
+                    <th scope="col" className="px-6 py-3  ">
                         Time
                     </th>
                     <th scope="col" className="px-6 py-3">
-                        Temp
+                        Temperature
                     </th>
                     <th scope="col" className="px-6 py-3">
-                        GCS
+                        Green Cmpression Strength(GCS)
                     </th>
                     <th scope="col" className="px-6 py-3">
                         Compactibility
@@ -110,8 +109,8 @@ function TableData(props) {
             {
                 allData.map((v,k)=>(
                     <tr key={k}  className="bg-white border-b hover:bg-gray-50">
-                        <td className=' max-md:hidden '>{DateTime.fromISO(v.datetime).toFormat('yyyy-MM-dd')}</td>
-                        <td className=' max-md:hidden '>{DateTime.fromISO(v.datetime).toFormat('HH:mm:ss')}</td>
+                        <td className='px-6 py-4  '>{DateTime.fromISO(v.datetime).toFormat('yyyy-MM-dd')}</td>
+                        <td className='px-6 py-4 '>{DateTime.fromISO(v.datetime).toFormat('HH:mm:ss')}</td>
                         <td className="px-6 py-4"><input  value={v.temp} name='temp' onChange={(e)=>{handleChange(k,e.target.name,e.target.value)}} disabled={(editRowButton===k )?'':'true'} className=' w-12 ' ></input></td>
                         <td className="px-6 py-4"><input  value={v.gcs} name='gcs' onChange={(e)=>{handleChange(k,e.target.name,e.target.value)}} disabled={(editRowButton===k && current.admin)?'':'true'} className=' w-12 ' ></input></td>
                         <td className="px-6 py-4"><input  value={v.comp} name='comp' onChange={(e)=>{handleChange(k,e.target.name,e.target.value)}} disabled={(editRowButton===k && current.admin)?'':'true'} className=' w-12 ' ></input></td>

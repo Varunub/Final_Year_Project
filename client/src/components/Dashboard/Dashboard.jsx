@@ -11,7 +11,7 @@ function Container() {
   
   return (
     <div className=' py-9 min-h-screen bg-gray-50'>
-      <div className='w-[85%] m-auto'>
+      <div className='w-[95%] m-auto'>
         <NavBar></NavBar>
         <Hero ></Hero>
       </div>

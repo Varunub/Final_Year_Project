@@ -138,7 +138,7 @@ function Profile() {
             <div className=' text-xl  text-gray-900 p-2 '>
               Admin Details
             </div>
-            <div className= ' mt-8'>
+            <div className= ''>
               <Employees id={current.employee_id}></Employees>
 
             </div>
@@ -155,7 +155,7 @@ function Profile() {
   function render(){
     return (
       <section className='min-h-screen bg-gray-50   py-9'>
-        <div className=' w-[85%] m-auto'>
+        <div className=' w-[95%] m-auto'>
           <NavBar></NavBar>
           <div className=' border-2 p-8 mt-5 bg-white rounded-lg'>
             <div className=' text-xl  text-gray-900 p-2 '>

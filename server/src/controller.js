@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateAdmin = exports.updateRecord = exports.getyesterdayRecords = exports.getCurrentRecords = exports.getEmployees = exports.validate = exports.getProfile = exports.getName = exports.resetPassword = exports.updateuser = exports.logout = exports.userInfo = exports.insertData = exports.verifyUserPermissions = exports.login = exports.register = void 0;
+exports.updateAdmin = exports.updateRecord = exports.getSpecificRecords = exports.getyesterdayRecords = exports.getCurrentRecords = exports.getEmployees = exports.validate = exports.getProfile = exports.getName = exports.resetPassword = exports.updateuser = exports.logout = exports.userInfo = exports.insertData = exports.verifyUserPermissions = exports.login = exports.register = void 0;
 const conn_js_1 = require("./conn.js");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const luxon_1 = require("luxon");
@@ -217,11 +217,23 @@ function getyesterdayRecords(req, res) {
     });
 }
 exports.getyesterdayRecords = getyesterdayRecords;
+function getSpecificRecords(req, res) {
+    // console.log(req.body)
+    conn_js_1.client.query(`select * from machinedata where datetime>=$1 and datetime<=$2 order by datetime asc`, [req.body.from + ' 00:00:00', req.body.to + ' 23:59:59'], (err, result) => {
+        if (err) {
+            res.send({ msg: "Something went wrong" });
+        }
+        else {
+            // console.log(result.rows)
+            res.send({ data: result.rows, msg: "Success" });
+        }
+    });
+}
+exports.getSpecificRecords = getSpecificRecords;
 function updateRecord(req, res) {
     const { datetime, temp, gcs, comp, moist, perm } = req.body;
     conn_js_1.client.query(`update machinedata set temp=$1,gcs=$2,comp=$3,moist=$4,perm=$5 where datetime=$6 `, [parseFloat(temp), parseFloat(gcs), parseFloat(comp), parseFloat(moist), parseFloat(perm), datetime], (err, result) => {
         if (err) {
-            console.log(err);
             res.send({ msg: "Something went wrong" });
         }
         else {

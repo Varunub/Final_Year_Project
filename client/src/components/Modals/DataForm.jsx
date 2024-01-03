@@ -45,23 +45,23 @@ function DataForm(props) {
               <form onSubmit={handelSubmit} >
                 <div className=' my-3'>
                   <label className='block mb-2 text-sm font-medium text-gray-900' htmlFor="username">Temperature</label>
-                  <input name='temp' value={current.temp} onChange={handleChange} type='text' placeholder='' required className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 max-sm:p-1.5 " />
+                  <input name='temp' value={current.temp} onChange={handleChange} type='number' placeholder='' required className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 max-sm:p-1.5 " />
                 </div>
                 <div className=' my-3'>
                   <label className='block mb-2 text-sm font-medium text-gray-900' htmlFor="username">GCS</label>
-                  <input name='gcs' value={current.gcs} onChange={handleChange} type='text' placeholder='' required className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 max-sm:p-1.5 " />
+                  <input name='gcs' value={current.gcs} onChange={handleChange} type='number' placeholder='' required className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 max-sm:p-1.5 " />
                 </div>
                 <div className=' my-3'>
                   <label className='block mb-2 text-sm font-medium text-gray-900' htmlFor="username">Compactibility</label>
-                  <input name='comp' value={current.comp} onChange={handleChange} type='text' placeholder='' required className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 max-sm:p-1.5 " />
+                  <input name='comp' value={current.comp} onChange={handleChange} type='number' placeholder='' required className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 max-sm:p-1.5 " />
                 </div>
                 <div className=' my-3'>
                   <label className='block mb-2 text-sm font-medium text-gray-900' htmlFor="username">Moisture</label>
-                  <input name='moist' value={current.moist} onChange={handleChange} type='text' placeholder='' required className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 max-sm:p-1.5 " />
+                  <input name='moist' value={current.moist} onChange={handleChange} type='number' placeholder='' required className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 max-sm:p-1.5 " />
                 </div>
                 <div className=' my-3'>
                   <label className='block mb-2 text-sm font-medium text-gray-900' htmlFor="username">Permeability</label>
-                  <input name='perm' value={current.perm} onChange={handleChange} type='text' placeholder='' required className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 max-sm:p-1.5 " />
+                  <input name='perm' value={current.perm} onChange={handleChange} type='number' placeholder='' required className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 max-sm:p-1.5 " />
                 </div>
                 <button onClick={handelSubmit} className=' mt-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none ' >Submit</button>
               </form>

@@ -23,7 +23,7 @@ function Hero() {
   };
   const [onModal,setModal]=useState(false);
   const [toogle,settoogle]=useState(true);
-  
+  const [alldata,setalldata]=useState([{}]);
   
 
   function handleClick(){
@@ -59,7 +59,7 @@ function Hero() {
 
   }
 
-  const [alldata,setalldata]=useState([{}]);
+ 
 
   useEffect(()=>{
     axios.get(import.meta.env.VITE_API_GETTODAYRECORD_ENDPOINT).then(res=>{
