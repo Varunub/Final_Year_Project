@@ -43,7 +43,7 @@ function NavBar() {
         <img className=' w-20 h-20 mix-blend-multiply mr-4 max-lg:w-16 max-lg:h-16' src={akpLogo} alt="Logo" />
         <div className=' mx-4 m-auto max-md:hidden '><a href="/home">Home</a></div>
         <div className=' mx-4 m-auto max-md:hidden' ><a href="/analytics">Analytics</a></div>
-        <div className=' mx-4 m-auto max-md:hidden'><a href='/profile'>Setting</a></div>
+        <div className=' mx-4 m-auto max-md:hidden'><a href='/profile'>Settings</a></div>
       </div>
       <div className=' flex space-x-2 max-md:hidden ' >
         <p className= 'm-auto' >Hii,{name}</p>

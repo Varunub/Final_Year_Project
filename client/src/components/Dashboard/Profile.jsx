@@ -9,6 +9,7 @@ import Modal from 'react-modal'
 import PasswordForm from '../Modals/PasswordForm'
 import { Navigate, redirect, useNavigate } from 'react-router-dom'
 import Employees from './Employees'
+import Threshold from './Threshold'
 function Profile() {
   const cookie=new Cookies()
   const navigate=useNavigate()
@@ -132,8 +133,8 @@ function Profile() {
 
   function renderEmployees(){
     return (
-      <section className='min-h-screen bg-gray-50   py-9'>
-        <div className=' w-[85%] m-auto'>
+      <section className=' bg-gray-50   py-9'>
+        <div className=' w-[95%] m-auto'>
           <div className=' border-2 p-8 mt-5 bg-white rounded-lg'>
             <div className=' text-xl  text-gray-900 p-2 '>
               Admin Details
@@ -151,6 +152,29 @@ function Profile() {
 
     )
   }
+
+  function renderThreshold(){
+    return (
+      <section className=' bg-gray-50   py-9'>
+        <div className=' w-[95%] m-auto'>
+          <div className=' border-2 p-8 mt-0 bg-white rounded-lg'>
+            <div className=' text-xl  text-gray-900 p-2 '>
+              Threshold Details
+            </div>
+            <div className= ''>
+              <Threshold></Threshold>
+            </div>
+          </div>
+
+          
+        </div>
+        
+      </section>
+
+    )
+  }
+
+
 
   function render(){
     return (
@@ -227,6 +251,7 @@ function Profile() {
           
 
         {current.superadmin?renderEmployees():<></>}
+        {current.superadmin?renderThreshold():<></>}
       </section>
     )
   }

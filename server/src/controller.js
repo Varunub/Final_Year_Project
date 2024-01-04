@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateAdmin = exports.updateRecord = exports.getSpecificRecords = exports.getyesterdayRecords = exports.getCurrentRecords = exports.getEmployees = exports.validate = exports.getProfile = exports.getName = exports.resetPassword = exports.updateuser = exports.logout = exports.userInfo = exports.insertData = exports.verifyUserPermissions = exports.login = exports.register = void 0;
+exports.updateAdmin = exports.updateThreshold = exports.updateRecord = exports.getSpecificRecords = exports.getyesterdayRecords = exports.getCurrentRecords = exports.getThresholdData = exports.getEmployees = exports.validate = exports.getProfile = exports.getName = exports.resetPassword = exports.updateuser = exports.logout = exports.userInfo = exports.insertData = exports.verifyUserPermissions = exports.login = exports.register = void 0;
 const conn_js_1 = require("./conn.js");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const luxon_1 = require("luxon");
@@ -199,6 +199,12 @@ function getEmployees(req, res) {
     });
 }
 exports.getEmployees = getEmployees;
+function getThresholdData(req, res) {
+    conn_js_1.client.query(`SELECT * FROM threshold order by name`, (err, result) => {
+        res.send({ data: result.rows });
+    });
+}
+exports.getThresholdData = getThresholdData;
 function getCurrentRecords(req, res) {
     const date = luxon_1.DateTime.local();
     const start = date.startOf('day');
@@ -242,6 +248,18 @@ function updateRecord(req, res) {
     });
 }
 exports.updateRecord = updateRecord;
+function updateThreshold(req, res) {
+    const { name, SC1, WL1, WL2, SC2 } = req.body;
+    conn_js_1.client.query(`update threshold set "SC1"=$1,"WL1"=$2,"WL2"=$3,"SC2"=$4 where name=$5 `, [parseFloat(SC1), parseFloat(WL1), parseFloat(WL2), parseFloat(SC2), name], (err, result) => {
+        if (err) {
+            res.send({ msg: "Something went wrong" });
+        }
+        else {
+            res.send({ msg: "Successfully Updated " });
+        }
+    });
+}
+exports.updateThreshold = updateThreshold;
 function updateAdmin(req, res) {
     const id = req.params['id'];
     const { access } = req.body;
