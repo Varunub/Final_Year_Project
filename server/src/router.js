@@ -43,4 +43,5 @@ router.route('/update').put(controller.updateuser);
 router.route('/updateRecord').put(controller.updateRecord);
 router.route('/updatethreshold').put(controller.updateThreshold);
 router.route('/updateAdmin/:id').put(controller.updateAdmin);
+router.route('./resetPassword').put(controller.resetPassword);
 exports.default = router;

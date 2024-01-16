@@ -27,10 +27,15 @@ function register(req, res) {
                     const hashed = bcrypt_1.default.hashSync(password, Number(process.env.SALTING));
                     conn_js_1.client.query(`INSERT INTO EMPLOYEE (employee_id,name,email,password,phonenumber) VALUES ($1,$2,$3,$4,$5)`, [employee.trim(), name.trim(), username.trim(), hashed, phone], (err, result) => {
                         if (err) {
-                            res.send({ msg: "Error inserting" });
+                            if (err.code == '23505') {
+                                res.send({ msg: "Email Already Exists" });
+                            }
+                            else {
+                                res.send({ msg: "Something went wrong" });
+                            }
                         }
                         if (result) {
-                            res.send({ msg: "Successfully inserted" });
+                            res.send({ msg: "Successfully Registered" });
                         }
                     });
                 }
@@ -155,6 +160,23 @@ function updateuser(req, res) {
 }
 exports.updateuser = updateuser;
 function resetPassword(req, res) {
+    console.log(req.body);
+    conn_js_1.client.query(`SELECT * FROM EMPLOYEE WHERE email=$1`, [req.body.email[0]], (err, result) => {
+        if (result.rowCount > 0) {
+            const hashed = bcrypt_1.default.hashSync(req.body.password[0], Number(process.env.SALTING));
+            conn_js_1.client.query(`UPDATE employee SET password=$1 where email=$2`, [hashed, req.body.email[0]], (err, result) => {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+                    res.send({ msg: "Updated Successfuly" });
+                }
+            });
+        }
+        else {
+            res.send({ msg: "Email doesn't exists" });
+        }
+    });
 }
 exports.resetPassword = resetPassword;
 function getName(req, res) {

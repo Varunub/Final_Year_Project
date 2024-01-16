@@ -7,6 +7,7 @@ import LoginForm from './components/LoginForm'
 import Home from './components/Home'
 import Profile from './components/Dashboard/Profile'
 import Analytics from './components/Dashboard/Analytics'
+import ForgotPasswordForm from './components/ForgotPasswordForm'
 function App() {
   return (
 
@@ -19,7 +20,7 @@ function App() {
             <Route path="/home" element={<Home></Home>}></Route>
             <Route path="/profile" element={<Profile></Profile>}></Route>
             <Route path="/analytics" element={<Analytics></Analytics>}></Route>
-
+            <Route path="/forgotpassword" element={<ForgotPasswordForm></ForgotPasswordForm>}></Route>
        </Routes>
     </BrowserRouter>
     
