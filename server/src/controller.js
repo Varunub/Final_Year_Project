@@ -246,14 +246,33 @@ function getyesterdayRecords(req, res) {
 }
 exports.getyesterdayRecords = getyesterdayRecords;
 function getSpecificRecords(req, res) {
-    // console.log(req.body)
-    conn_js_1.client.query(`select * from machinedata where datetime>=$1 and datetime<=$2 order by datetime asc`, [req.body.from + ' 00:00:00', req.body.to + ' 23:59:59'], (err, result) => {
-        if (err) {
-            res.send({ msg: "Something went wrong" });
+    return __awaiter(this, void 0, void 0, function* () {
+        if (req.body.type[0] === 'Graph') {
+            const start = new Date(req.body.from);
+            const end = new Date(req.body.to);
+            var out = {};
+            const currentdate = new Date(start);
+            while (currentdate <= end) {
+                const result = yield conn_js_1.client.query(`select ${req.body.machinetype} from machinedata where datetime>=$1 and datetime<=$2`, [currentdate.toISOString().split('T')[0] + ' 00:00:00', currentdate.toISOString().split('T')[0] + ' 23:59:59']);
+                if (result.rowCount > 0) {
+                    var arr = result.rows.map((row) => Object.values(row).map(value => Number(value))).flat().filter((value) => !isNaN(value));
+                    out[currentdate.toISOString().split('T')[0]] = arr;
+                }
+                currentdate.setDate(currentdate.getDate() + 1);
+            }
+            console.log(out);
+            res.send({ data: out, msg: "Success" });
         }
         else {
-            // console.log(result.rows)
-            res.send({ data: result.rows, msg: "Success" });
+            conn_js_1.client.query(`select * from machinedata where datetime>=$1 and datetime<=$2 order by datetime asc`, [req.body.from + ' 00:00:00', req.body.to + ' 23:59:59'], (err, result) => {
+                if (err) {
+                    res.send({ msg: "Something went wrong" });
+                }
+                else {
+                    // console.log(result.rows)
+                    res.send({ data: result.rows, msg: "Success" });
+                }
+            });
         }
     });
 }

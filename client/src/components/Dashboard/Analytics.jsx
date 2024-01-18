@@ -33,13 +33,27 @@ function Analytics() {
 
   async function onSubmit(e){
     e.preventDefault();
+    if(!formData.from || !formData.to){
+      alert("Please Select dates")
+      setType('')
+      return
+    }
+    if(formData.type[0]==='Graph' && (!formData.machinetype || formData.machinetype[0]==='None')){
+      alert("Please Select machine type")
+      setType('')
+      return
+    }
+    else{
+      await axios.post(import.meta.env.VITE_API_GETSPECIFICRECORD_ENDPOINT,formData).then((res)=>{
+        if(res.data.msg=="Success"){
+          setalldata(res.data.data);
+        }
+      })
+    }
     setType(formData.type[0])
-    axios.post(import.meta.env.VITE_API_GETSPECIFICRECORD_ENDPOINT,{from:formData.from[0],to:formData.to[0]}).then((res)=>{
-      if(res.data.msg=="Success"){
-        setalldata(res.data.data);
-        setToogle(true)
-      }
-    })
+    setToogle(true)
+
+   
   }
 
   function handleChange(e){
@@ -93,11 +107,11 @@ function Analytics() {
                     <label htmlFor="type" className=' font-semibold  text-xl p-4'>Machine Type :</label>
                     <select id='type' name='machinetype' onChange={handleChange} className=' border-2 rounded-md hover:border-black'required='true'>
                         <option value="None" >None</option>
-                        <option value="Graph" >Temperature</option>
-                        <option value="Green Compression Strength" >Green Compression Strength</option>
-                        <option value="Compactibility" >Compactibility</option>
-                        <option value="Moisture" >Moisture</option>
-                        <option value="Permiability" >Permiability</option>
+                        <option value="temp" >Temperature</option>
+                        <option value="gcs" >Green Compression Strength</option>
+                        <option value="comp" >Compactibility</option>
+                        <option value="moist" >Moisture</option>
+                        <option value="perm" >Permiability</option>
                     </select>
                   </div>
                   :<></>
@@ -113,7 +127,7 @@ function Analytics() {
             {type==="Graph"?<Graph data={sampleData} WL1={WL1}  LCL={LCL} UCL={UCL} SC1={SC1} SC2={SC2}></Graph>:type==='Table'?<TableData data={alldata} insertButton={0}></TableData>:<></>}
           </div>
           {
-            ((formData.type=="Table" || formData.type=="Graph") && toogle)?
+            ((type=="Table") && toogle)?
             <div className=' text-center ' >
               <button onClick={downloadDataInExcel} type="button" className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 m-4  w-36  focus:outline-none ">Download Data</button>
             </div>
