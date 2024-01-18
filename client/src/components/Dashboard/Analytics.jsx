@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import Modal from 'react-modal'
@@ -49,6 +50,7 @@ function Analytics() {
           setalldata(res.data.data);
         }
       })
+      formData.machinetype=''
     }
     setType(formData.type[0])
     setToogle(true)
