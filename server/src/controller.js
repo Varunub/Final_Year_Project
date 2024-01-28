@@ -222,9 +222,28 @@ function getEmployees(req, res) {
 }
 exports.getEmployees = getEmployees;
 function getThresholdData(req, res) {
-    conn_js_1.client.query(`SELECT * FROM threshold order by name`, (err, result) => {
-        res.send({ data: result.rows });
-    });
+    const type = req.params['type'];
+    // console.log(type)
+    if (type) {
+        conn_js_1.client.query(`SELECT * FROM threshold where name=$1`, [type], (err, result) => {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                res.send({ data: result.rows });
+            }
+        });
+    }
+    else {
+        conn_js_1.client.query(`SELECT * FROM threshold order by name`, (err, result) => {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                res.send({ data: result.rows });
+            }
+        });
+    }
 }
 exports.getThresholdData = getThresholdData;
 function getCurrentRecords(req, res) {
@@ -250,17 +269,27 @@ function getSpecificRecords(req, res) {
         if (req.body.type[0] === 'Graph') {
             const start = new Date(req.body.from);
             const end = new Date(req.body.to);
-            var out = {};
-            const currentdate = new Date(start);
-            while (currentdate <= end) {
-                const result = yield conn_js_1.client.query(`select ${req.body.machinetype} from machinedata where datetime>=$1 and datetime<=$2`, [currentdate.toISOString().split('T')[0] + ' 00:00:00', currentdate.toISOString().split('T')[0] + ' 23:59:59']);
-                if (result.rowCount > 0) {
-                    var arr = result.rows.map((row) => Object.values(row).map(value => Number(value))).flat().filter((value) => !isNaN(value));
-                    out[currentdate.toISOString().split('T')[0]] = arr;
-                }
-                currentdate.setDate(currentdate.getDate() + 1);
-            }
-            console.log(out);
+            var out = [];
+            var dateTime = [];
+            var data = [];
+            const result = yield conn_js_1.client.query(`SELECT datetime, ${req.body.machinetype} FROM machinedata WHERE datetime BETWEEN $1 AND $2 ORDER BY datetime ASC`, [req.body.from + ' 00:00:00', req.body.to + ' 23:59:59']);
+            // console.log(result.rows)
+            var arrTime = result.rows.map((row) => (Object.values(row)[0]));
+            var arrData = result.rows.map((row) => (Object.values(row)[1]));
+            dateTime.push(arrTime);
+            data.push(arrData);
+            dateTime = dateTime.flat();
+            const formattedDates = dateTime.map((dateObject) => {
+                const utcDateTime = luxon_1.DateTime.fromJSDate(dateObject, { zone: 'utc' });
+                const istDateTime = utcDateTime.setZone('Asia/Kolkata');
+                const formattedDate = istDateTime.toFormat('yyyy-MM-dd HH:mm:ss');
+                return formattedDate;
+            });
+            data = data.flat();
+            const formatedData = data.map((str) => (isNaN(Number(str)) ? 0 : Number(str)));
+            out.push(formattedDates);
+            out.push(formatedData);
+            // console.log(out)
             res.send({ data: out, msg: "Success" });
         }
         else {
@@ -269,7 +298,7 @@ function getSpecificRecords(req, res) {
                     res.send({ msg: "Something went wrong" });
                 }
                 else {
-                    // console.log(result.rows)
+                    console.log(result.rows);
                     res.send({ data: result.rows, msg: "Success" });
                 }
             });

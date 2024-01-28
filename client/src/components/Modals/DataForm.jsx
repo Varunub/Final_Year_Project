@@ -28,7 +28,6 @@ function DataForm(props) {
     });
     
     setData(data);
-
   }
   function handleChange(e){
     setData((prev)=>{
@@ -36,7 +35,7 @@ function DataForm(props) {
     })
   }
   return (
-    <section className=' ml-12 max-md:m-0 '>
+    <section className=' '>
         <div className=' flex flex-col items-center '>
           <button className=' p-2 border-2 text-4xl text-gray-400 rounded-full hover:text-black' onClick={props.closeModal}><AiOutlineClose></AiOutlineClose></button>
           <div className=' w-[35%] px-6 py-7 m-4 shadow-2xl rounded-lg bg-white max-sm:w-[95%] max-lg:w-[70%]'>

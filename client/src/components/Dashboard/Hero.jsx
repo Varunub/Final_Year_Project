@@ -70,7 +70,7 @@ function Hero() {
 
   return (
     <>
-      {onModal?<div className=' m-auto p-0 w-[80%] absolute z-10 text-left rounded-xl max-md:w-[90%]  '><DataForm closeModal={onRequestClose}></DataForm></div>:null}
+      {onModal?<div className=' '><DataForm closeModal={onRequestClose}></DataForm></div>:null}
       <div className= {(onModal)?'hidden':'flex flex-row text-center max-md:flex-col'}>
         <div className= ' mt-8 basis-1/4'>
             <button name='today' onClick={handleButton} className={(toogle)?'text-black max-md:p-12 m-4 w-72 py-20 text-4xl rounded-xl shadow-xl':' w-72 bg-white text-4xl  text-gray-400 border-2 py-20  rounded-xl '} >Today</button>

@@ -36,7 +36,7 @@ router.route('/getemployees').get(controller.getEmployees);
 router.route('/home').get(controller.userInfo);
 router.route('/getcurrentrecords').get(controller.getCurrentRecords);
 router.route('/getyesterdayrecords').get(controller.getyesterdayRecords);
-router.route('/getthresholddata').get(controller.getThresholdData);
+router.route('/getthresholddata/:type?').get(controller.getThresholdData);
 router.route('/getspecificrecord').post(controller.getSpecificRecords);
 router.route('/resetpassword').put(controller.resetPassword);
 router.route('/update').put(controller.updateuser);

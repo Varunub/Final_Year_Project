@@ -10,18 +10,10 @@ import Graph from './Graph'
 import TableData from './TableData'
 import * as ExcelJS from 'exceljs';
 import { saveAs } from 'file-saver';
+import { Navigate, redirect, useNavigate } from 'react-router-dom'
 function Analytics() {
   const [type,setType]=useState("");
-  const sampleData = {
-    shift: [1, 2, 3, 4, 5, 6, 7, 8, 9], 
-    avg: [1450, 1420, 1385, 1395, 1412, 1378, 1365, 1440, 1432], 
-  };
-  
-  const WL1 = 1050  
-  const LCL = 1150  
-  const UCL = 1350  
-  const SC1 = 1450  
-  const SC2 = 1800 
+  const navigate=useNavigate()
   const [alldata,setalldata]=useState([{}]);
   const data={
     from:"",
@@ -37,10 +29,12 @@ function Analytics() {
     if(!formData.from || !formData.to){
       alert("Please Select dates")
       setType('')
+
       return
     }
     if(formData.type[0]==='Graph' && (!formData.machinetype || formData.machinetype[0]==='None')){
       alert("Please Select machine type")
+      navigate('/analytics')
       setType('')
       return
     }
@@ -50,7 +44,6 @@ function Analytics() {
           setalldata(res.data.data);
         }
       })
-      formData.machinetype=''
     }
     setType(formData.type[0])
     setToogle(true)
@@ -77,7 +70,7 @@ function Analytics() {
       const workSheet=workbook.addWorksheet("Sheet 1")
       workSheet.addRows(formatedData)
       const blob=await workbook.xlsx.writeBuffer();
-      saveAs(new Blob([blob],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}),'data.xlsx')
+      saveAs(new Blob([blob],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}),`${formData.from[0]} to ${formData.to[0]}.xlsx`)
   }
   return (
     <div className=' py-9 min-h-screen bg-gray-50'>
@@ -121,12 +114,12 @@ function Analytics() {
                 
               </div>
               <div className=' text-center ' >
-                  <button onClick={onSubmit} type="button" className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 m-4  w-36  focus:outline-none ">Submit</button>
+                  <button onClick={onSubmit} type="button" className=" text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 m-4  w-36  focus:outline-none ">Submit</button>
               </div>
             </form>
           </div>
           <div className=' w-[80%] text-center m-auto mt-5 max-md:w-full'>
-            {type==="Graph"?<Graph data={sampleData} WL1={WL1}  LCL={LCL} UCL={UCL} SC1={SC1} SC2={SC2}></Graph>:type==='Table'?<TableData data={alldata} insertButton={0}></TableData>:<></>}
+            {type==="Graph"?<Graph data={alldata} machinetype={formData.machinetype[0]} from={formData.from[0]} to={formData.to[0]}></Graph>:type==='Table'?<TableData data={alldata} insertButton={0}></TableData>:<></>}
           </div>
           {
             ((type=="Table") && toogle)?
