@@ -307,8 +307,8 @@ function getSpecificRecords(req, res) {
 }
 exports.getSpecificRecords = getSpecificRecords;
 function updateRecord(req, res) {
-    const { datetime, temp, gcs, comp, moist, perm } = req.body;
-    conn_js_1.client.query(`update machinedata set temp=$1,gcs=$2,comp=$3,moist=$4,perm=$5 where datetime=$6 `, [parseFloat(temp), parseFloat(gcs), parseFloat(comp), parseFloat(moist), parseFloat(perm), datetime], (err, result) => {
+    const { datetime, temp, gcs, comp, moist, perm, comments } = req.body;
+    conn_js_1.client.query(`update machinedata set temp=$1,gcs=$2,comp=$3,moist=$4,perm=$5,comments=$6 where datetime=$7 `, [parseFloat(temp), parseFloat(gcs), parseFloat(comp), parseFloat(moist), parseFloat(perm), comments, datetime], (err, result) => {
         if (err) {
             res.send({ msg: "Something went wrong" });
         }

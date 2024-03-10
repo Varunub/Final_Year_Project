@@ -32,7 +32,7 @@ function Hero() {
 
   
   function onRequestClose(){
-    axios.get('/api/getcurrentrecords').then(res=>{
+    axios.get(import.meta.env.VITE_API_GETTODAYRECORD_ENDPOINT).then(res=>{
       
       setalldata(res.data.data);
     })

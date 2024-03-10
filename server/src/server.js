@@ -28,7 +28,7 @@ app.use(express_1.default.urlencoded({ extended: false }));
 //         res.json({success:true})
 //     })
 // })
-app.listen(5000, () => {
+app.listen(Number(process.env.SERVER_PORT), () => {
     conn_js_1.client.connect();
     console.log("listening");
 });
